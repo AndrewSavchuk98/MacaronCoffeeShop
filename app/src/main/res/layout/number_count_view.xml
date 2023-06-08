@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,23 +8,32 @@
     android:orientation="horizontal"
     tools:parentTag="android.widget.LinearLayout">
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
         android:id="@+id/removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/round_remove_24" />
+        android:contentDescription="@string/remove"
+        android:src="@drawable/round_remove_24"
+        app:fabSize="mini"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/counterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
-        android:text="0"
-        android:textSize="20sp" />
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="8dp"
+        android:text="@string/_0"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/round_add_24" />
+        android:src="@drawable/round_add_24"
+        app:tint="@color/white"
+        app:fabSize="mini"
+        android:contentDescription="@string/add" />
 </merge>
