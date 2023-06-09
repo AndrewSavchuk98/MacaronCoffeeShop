@@ -10,18 +10,12 @@
 
     <style name="NumberCountButtons" parent="ShapeAppearanceOverlay.Material3.Button" />
 
-    <style name="ChipChoiceEnabled" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textColor">@color/white</item>
-        <item name="chipCornerRadius">8dp</item>
-        <item name="chipBackgroundColor">@color/primaryColor</item>
-    </style>
-
     <style name="ChipChoice" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textColor">@color/primaryColor</item>
-        <item name="chipStrokeColor">@color/primaryColor</item>
-        <item name="chipBackgroundColor">@color/white</item>
+        <item name="chipBackgroundColor">@drawable/chip_selector</item>
+        <item name="android:textColor">@drawable/chip_text_selector</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipCornerRadius">8dp</item>
+        <item name="chipStrokeColor">@color/primaryColor</item>
     </style>
 
 </resources>
