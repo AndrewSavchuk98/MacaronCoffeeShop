@@ -5,4 +5,6 @@
     <string name="remove">Remove</string>
     <string name="add">Add</string>
     <string name="_0">0</string>
+    <string name="customize">Customize</string>
+    <string name="add_order">Add Order</string>
 </resources>
