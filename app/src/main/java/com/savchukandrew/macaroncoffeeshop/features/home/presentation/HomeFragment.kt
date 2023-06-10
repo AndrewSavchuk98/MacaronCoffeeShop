@@ -7,8 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.savchukandrew.macaroncoffeeshop.R
 import com.savchukandrew.macaroncoffeeshop.databinding.FragmentHomeBinding
-import com.savchukandrew.macaroncoffeeshop.features.home.domain.models.Product
-import com.savchukandrew.macaroncoffeeshop.features.home.domain.models.SectionEntities
+import com.savchukandrew.macaroncoffeeshop.features.detail.presentation.DetailFragment
 import com.savchukandrew.macaroncoffeeshop.features.home.presentation.adapters.ProductAdapter
 import com.savchukandrew.macaroncoffeeshop.features.home.presentation.adapters.SectionAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,11 +25,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), ProductAdapter.OnProductC
         binding = FragmentHomeBinding.bind(view)
 
         val adapter = SectionAdapter()
+
         viewModel.homeState.observe(viewLifecycleOwner) {
 
             adapter.submitList(it.sectionList)
         }
-
         binding.parentRecyclerView.adapter = adapter
 
         adapter.setSectionListener(this)
@@ -38,11 +37,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), ProductAdapter.OnProductC
 
     }
 
-    override fun onClick(product: Product) {
-        //findNavController().navigate()
+    override fun onClick(productId: String) {
+        findNavController().navigate(R.id.detailFragment, DetailFragment.setProductId(productId))
     }
 
-    override fun onSectionClick(sectionEntities: SectionEntities) {
-        findNavController()
+    override fun onSectionClick(sectionEntitiesId: Int) {
+        TODO("Not yet implemented")
     }
+
 }

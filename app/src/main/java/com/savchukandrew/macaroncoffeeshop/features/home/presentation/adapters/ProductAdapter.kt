@@ -36,13 +36,13 @@ class ProductAdapter(private val list: List<Product>) :
     }
 
     interface OnProductClickListener {
-        fun onClick(product: Product)
+        fun onClick(productId: String)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.bind(list[position])
         holder.itemView.setOnClickListener {
-            listener.onClick(list[position])
+            listener.onClick(list[position].id)
         }
     }
 

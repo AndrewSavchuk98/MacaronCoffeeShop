@@ -22,7 +22,7 @@ class SectionAdapter : RecyclerView.Adapter<SectionAdapter.SectionViewHolder>() 
     }
 
     interface OnSectionClickListener {
-        fun onSectionClick(sectionEntities: SectionEntities)
+        fun onSectionClick(sectionEntitiesId: Int)
     }
 
     fun setInnerListener(listener: ProductAdapter.OnProductClickListener) {
@@ -37,7 +37,7 @@ class SectionAdapter : RecyclerView.Adapter<SectionAdapter.SectionViewHolder>() 
         fun bind(sectionEntities: SectionEntities) {
             binding.titleTextView.text = sectionEntities.title
             binding.moreButton.setOnClickListener {
-                sectionListener.onSectionClick(sectionEntities)
+                sectionListener.onSectionClick(sectionEntities.id)
             }
             val adapter = ProductAdapter(sectionEntities.list)
             binding.productRecyclerView.adapter = adapter
