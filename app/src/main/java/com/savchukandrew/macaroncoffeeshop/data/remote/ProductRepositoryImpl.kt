@@ -17,7 +17,7 @@ class ProductRepositoryImpl @Inject constructor(
             name = productEntity.name,
             image = productEntity.image,
             description = productEntity.description,
-            categoryId = productEntity.category!!.id
+            categoryId = "productEntity.category!!.id"
         )
     }
 

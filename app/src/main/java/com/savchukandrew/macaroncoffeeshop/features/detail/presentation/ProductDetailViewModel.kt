@@ -10,26 +10,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class ProductDetailState(
-    var productDetail: ProductDetail,
-    val isLoading: Boolean
-)
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     private val getProductDetailUseCase: GetProductDetailById
 ) : ViewModel() {
 
-    private val _productDetailState: MutableLiveData<ProductDetailState> = MutableLiveData()
-    val productDetailState: LiveData<ProductDetailState> = _productDetailState
+    private val _productDetail: MutableLiveData<ProductDetail?> = MutableLiveData()
+    val productDetail: LiveData<ProductDetail?> = _productDetail
 
     fun getProductById(productId: String) {
-        try {
-            viewModelScope.launch {
-                _productDetailState.value?.productDetail = getProductDetailUseCase(productId)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        viewModelScope.launch {
+            _productDetail.value = getProductDetailUseCase(productId)
         }
     }
 

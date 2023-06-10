@@ -20,7 +20,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
 
     private val viewModel by viewModels<ProductDetailViewModel>()
     private var counter = 0
-    private lateinit var product: ProductDetail
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,8 +29,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
         binding.iceChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
         }
-        viewModel.productDetailState.observe(viewLifecycleOwner) {
-            product = it.productDetail
+
+        viewModel.productDetail.observe(viewLifecycleOwner){
+            binding.productName.text = it?.name
         }
 
         val productId = requireArguments().getString(PRODUCT_ID_EXTRA, "")

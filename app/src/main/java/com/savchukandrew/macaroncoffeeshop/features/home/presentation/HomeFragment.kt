@@ -26,12 +26,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), ProductAdapter.OnProductC
 
         val adapter = SectionAdapter()
 
-        viewModel.homeState.observe(viewLifecycleOwner) {
 
-            adapter.submitList(it.sectionList)
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.progress.visibility = View.VISIBLE
+            } else {
+                binding.progress.visibility = View.GONE
+                binding.parentRecyclerView.adapter = adapter
+            }
         }
-        binding.parentRecyclerView.adapter = adapter
 
+        viewModel.sectionList.observe(viewLifecycleOwner) {
+            adapter.submitList(it ?: emptyList())
+        }
         adapter.setSectionListener(this)
         adapter.setInnerListener(this)
 

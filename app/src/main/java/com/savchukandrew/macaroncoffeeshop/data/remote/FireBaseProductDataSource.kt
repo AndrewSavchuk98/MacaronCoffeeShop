@@ -17,8 +17,7 @@ class FireBaseProductDataSource @Inject constructor(
     override suspend fun getProducts(): List<ProductRemoteEntity> = withContext(Dispatchers.IO) {
         val snapshot = db.collection("product").get().await()
         snapshot.documents.mapNotNull {
-          //  it.toObject(ProductRemoteEntity::class.java)?.copy(id = it.id)
-            it.toObject(ProductRemoteEntity::class.java)
+           it.toObject(ProductRemoteEntity::class.java)?.copy(id = it.id)
         }
     }
 
