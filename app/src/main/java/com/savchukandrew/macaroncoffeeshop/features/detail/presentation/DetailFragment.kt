@@ -2,7 +2,7 @@ package com.savchukandrew.macaroncoffeeshop.features.detail.presentation
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
@@ -10,6 +10,7 @@ import com.savchukandrew.macaroncoffeeshop.R
 import com.savchukandrew.macaroncoffeeshop.core.presentation.views.ButtonsAction
 import com.savchukandrew.macaroncoffeeshop.core.presentation.views.NumberCounterView
 import com.savchukandrew.macaroncoffeeshop.databinding.FragmentDetailBinding
+import com.savchukandrew.macaroncoffeeshop.features.detail.domain.model.ProductDetail
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
 
     private val viewModel by viewModels<ProductDetailViewModel>()
     private var counter = 0
+    private lateinit var product: ProductDetail
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,6 +30,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
         binding.iceChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
         }
+        viewModel.productDetailState.observe(viewLifecycleOwner) {
+            product = it.productDetail
+        }
+
+        val productId = requireArguments().getString(PRODUCT_ID_EXTRA, "")
+        viewModel.getProductById(productId)
+
     }
 
     override fun onClick(action: ButtonsAction) {
@@ -40,6 +49,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
                 if (counter > 0)
                     binding.counterView.setCounterText((--counter).toString())
             }
+        }
+    }
+
+    companion object {
+        private const val PRODUCT_ID_EXTRA =
+            "com.savchukandrew.macaroncoffeeshop.features.detail.presentation.PRODUCT_ID_EXTRA"
+
+        fun setProductId(productId: String): Bundle {
+            return bundleOf(PRODUCT_ID_EXTRA to productId)
         }
     }
 }
