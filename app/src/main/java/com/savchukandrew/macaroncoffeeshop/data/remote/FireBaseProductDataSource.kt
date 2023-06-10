@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.IllegalArgumentException
 
 class FireBaseProductDataSource @Inject constructor(
     private val db: FirebaseFirestore,
@@ -13,7 +14,7 @@ class FireBaseProductDataSource @Inject constructor(
 ) : RemoteProductDataSource {
 
     override suspend fun getProducts(): List<ProductRemoteEntity> = withContext(dispatcher) {
-        val snapshot = db.collection("products").get().await()
+        val snapshot = db.collection("product").get().await()
         snapshot.documents.mapNotNull {
             it.toObject(ProductRemoteEntity::class.java)?.copy(id = it.id)
         }
@@ -21,10 +22,8 @@ class FireBaseProductDataSource @Inject constructor(
 
     override suspend fun getProductById(productId: String): ProductRemoteEntity =
         withContext(dispatcher) {
-            val snapshot = db.collection("products").get().await()
-            snapshot.documents.mapNotNull {
-                it.toObject(ProductRemoteEntity::class.java)?.copy(id = it.id)
-            }
-            TODO()
+            val snapshot = db.collection("product").document(productId).get().await()
+            snapshot.toObject(ProductRemoteEntity::class.java)
+                ?: throw IllegalArgumentException("No equals ids")
         }
 }
