@@ -18,4 +18,8 @@
     <string name="normal">Normal</string>
     <string name="less">Less</string>
     <string name="total">Total</string>
+    <string name="home">Home</string>
+    <string name="order">Order</string>
+    <string name="gift">Gift</string>
+    <string name="position">Position</string>
 </resources>
