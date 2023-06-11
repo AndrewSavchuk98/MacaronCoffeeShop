@@ -22,4 +22,5 @@
     <string name="order">Order</string>
     <string name="gift">Gift</string>
     <string name="position">Position</string>
+    <string name="not_yet_implemented">Not yet Implemented</string>
 </resources>

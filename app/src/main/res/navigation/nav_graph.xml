@@ -26,4 +26,9 @@
         android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens.order.OrderFragment"
         android:label="OrderFragment"
         tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.location.presentation.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location" />
 </navigation>

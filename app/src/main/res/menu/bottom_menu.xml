@@ -13,6 +13,7 @@
         android:icon="@drawable/redeem"
         android:title="@string/gift" />
     <item
+        android:id="@id/locationFragment"
         android:icon="@drawable/location_on"
         android:title="@string/position" />
 </menu>
