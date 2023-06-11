@@ -21,4 +21,9 @@
         android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens.SectionFragment"
         android:label="SectionFragment"
         tools:layout="@layout/fragment_section" />
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens.order.OrderFragment"
+        android:label="OrderFragment"
+        tools:layout="@layout/fragment_order" />
 </navigation>
