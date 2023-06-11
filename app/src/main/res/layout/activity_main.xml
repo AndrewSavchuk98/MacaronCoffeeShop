@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Toolbar"
         android:background="@color/secondaryColor"
         app:title="@string/top_bar_name"
         app:titleCentered="true" />
@@ -27,6 +28,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_menu" />
 
