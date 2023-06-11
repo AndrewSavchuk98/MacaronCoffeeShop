@@ -35,10 +35,10 @@ class HomeViewModel @Inject constructor(
 
     fun getProductListBySection(sectionId: Int){
         viewModelScope.launch {
-           val section =  getSectionProductsUseCase().filter {
-                it.id == sectionId
-            }
-            _productList.value = section[0].list
+           val section = getSectionProductsUseCase().single {
+               it.id == sectionId
+           }.list
+            _productList.value = section
         }
     }
 }
