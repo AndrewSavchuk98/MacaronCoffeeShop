@@ -10,6 +10,7 @@
         android:icon="@drawable/order"
         android:title="@string/order" />
     <item
+        android:id="@id/giftFragment"
         android:icon="@drawable/redeem"
         android:title="@string/gift" />
     <item

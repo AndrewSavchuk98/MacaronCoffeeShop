@@ -31,4 +31,9 @@
         android:name="com.savchukandrew.macaroncoffeeshop.features.location.presentation.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/giftFragment"
+        tools:layout="@layout/fragment_gift"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.gift.presentation.GiftFragment"
+        android:label="GiftFragment" />
 </navigation>
