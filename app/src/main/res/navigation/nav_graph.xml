@@ -7,13 +7,18 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.HomeFragment"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        tools:layout="@layout/fragment_detail"
         android:id="@+id/detailFragment"
         android:name="com.savchukandrew.macaroncoffeeshop.features.detail.presentation.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/sectionFragment"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens.SectionFragment"
+        android:label="SectionFragment"
+        tools:layout="@layout/fragment_section" />
 </navigation>

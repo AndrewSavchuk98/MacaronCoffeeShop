@@ -1,4 +1,4 @@
-package com.savchukandrew.macaroncoffeeshop.features.home.presentation
+package com.savchukandrew.macaroncoffeeshop.features.home.presentation.screens
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.savchukandrew.macaroncoffeeshop.R
 import com.savchukandrew.macaroncoffeeshop.databinding.FragmentHomeBinding
 import com.savchukandrew.macaroncoffeeshop.features.detail.presentation.DetailFragment
+import com.savchukandrew.macaroncoffeeshop.features.home.presentation.HomeViewModel
 import com.savchukandrew.macaroncoffeeshop.features.home.presentation.adapters.ProductAdapter
 import com.savchukandrew.macaroncoffeeshop.features.home.presentation.adapters.SectionAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +50,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), ProductAdapter.OnProductC
     }
 
     override fun onSectionClick(sectionEntitiesId: Int) {
-        TODO("Not yet implemented")
+        findNavController().navigate(
+            R.id.sectionFragment,
+            SectionFragment.setSectionId(sectionEntitiesId)
+        )
     }
 
 }
