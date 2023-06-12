@@ -24,4 +24,8 @@
     <string name="gift">Gift</string>
     <string name="position">Position</string>
     <string name="not_yet_implemented">Not yet Implemented</string>
+    <string name="make_offer">Make offer</string>
+    <string name="add_more">Add more</string>
+    <string name="delete">delete</string>
+    <string name="no_products">No Products</string>
 </resources>
