@@ -6,12 +6,16 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.google.android.material.chip.Chip
 import com.savchukandrew.macaroncoffeeshop.R
 import com.savchukandrew.macaroncoffeeshop.core.presentation.views.ButtonsAction
 import com.savchukandrew.macaroncoffeeshop.core.presentation.views.NumberCounterView
 import com.savchukandrew.macaroncoffeeshop.databinding.FragmentDetailBinding
+import com.savchukandrew.macaroncoffeeshop.features.cart.domain.CartItem
+import com.savchukandrew.macaroncoffeeshop.features.cart.presentation.CartFragment
+import com.savchukandrew.macaroncoffeeshop.features.detail.domain.model.DescriptionModel
 import com.savchukandrew.macaroncoffeeshop.features.detail.domain.model.ProductDetail
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,15 +28,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
     private var counter = 1
     private lateinit var product: ProductDetail
     private var totalPrice = 0
+    private val descriptionModel = DescriptionModel()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
         binding.counterView.setListener(this)
+        val productId = requireArguments().getString(PRODUCT_ID_EXTRA, "")
+        viewModel.getProductById(productId)
 
         binding.iceChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
-           // customizeHashMap[chipGroup.id] = titleOrNull.toString()
+            descriptionModel.ice = titleOrNull.toString()
         }
         binding.sizeChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
@@ -44,16 +52,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
             }
             binding.priceTextView.text = "$total grn"
             updateTotalPrice(total)
-           // updatePrice(product.price)
+            // updatePrice(product.price)
+            descriptionModel.size = titleOrNull.toString()
         }
         binding.sugarChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
             //customizeHashMap[chipGroup.id] = titleOrNull.toString()
-
+            descriptionModel.sugar = titleOrNull.toString()
         }
         binding.variantChipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
-          //  customizeHashMap[chipGroup.id] = titleOrNull.toString()
+            //  customizeHashMap[chipGroup.id] = titleOrNull.toString()
+            descriptionModel.variant = titleOrNull.toString()
         }
 
         viewModel.productDetail.observe(viewLifecycleOwner) {
@@ -67,10 +77,30 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
 
         binding.addOrderButton.setOnClickListener {
             Toast.makeText(context, " Price is ${totalPrice}", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(
+                R.id.cartFragment, CartFragment.setArgs(
+                    CartItem(
+                        id = productId,
+                        image = product.image,
+                        productName = product.name,
+                        description = "Size: ${descriptionModel.size}, " +
+                                "variant: ${descriptionModel.variant}, " +
+                                "sugar: ${descriptionModel.sugar}, " +
+                                "ice: ${
+                                    if (descriptionModel.variant == "Hot") {
+                                        "None"
+                                    } else {
+                                        descriptionModel.ice
+                                    }
+                                }",
+                        price = totalPrice,
+                        quantity = counter
+                    )
+                )
+            )
         }
 
-        val productId = requireArguments().getString(PRODUCT_ID_EXTRA, "")
-        viewModel.getProductById(productId)
+
         binding.counterView.setCounterText(counter.toString())
     }
 
@@ -79,6 +109,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
             ButtonsAction.ADD -> {
                 increaseQuantity()
             }
+
             ButtonsAction.REMOVE -> {
                 decreaseQuantity()
             }
@@ -109,13 +140,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
         val total = price * counter
         updatePrice(total)
     }
+
     private fun updatePrice(price: Int) {
         binding.totalPriceTextView.text = "$price grn"
         totalPrice = price
     }
 
-    private fun updateUI(){
-       // binding.totalPriceTextView.text = "$price grn"
+    private fun updateUI() {
+        // binding.totalPriceTextView.text = "$price grn"
         //binding.priceTextView.text = "${it?.price} grn"
 
     }
@@ -123,6 +155,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
     companion object {
         private const val PRODUCT_ID_EXTRA =
             "com.savchukandrew.macaroncoffeeshop.features.detail.presentation.PRODUCT_ID_EXTRA"
+
         fun setProductId(productId: String): Bundle {
             return bundleOf(PRODUCT_ID_EXTRA to productId)
         }
