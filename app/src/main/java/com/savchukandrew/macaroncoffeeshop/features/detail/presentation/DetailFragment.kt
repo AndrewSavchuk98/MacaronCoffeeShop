@@ -84,8 +84,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
                         image = product.image,
                         productName = product.name,
                         description = "Size: ${descriptionModel.size}, " +
-                                "variant: ${descriptionModel.variant}, " +
-                                "sugar: ${descriptionModel.sugar}, " +
+                                "variant: ${descriptionModel.variant}, \n" +
+                                "Sugar: ${descriptionModel.sugar}, " +
                                 "ice: ${
                                     if (descriptionModel.variant == "Hot") {
                                         "None"
