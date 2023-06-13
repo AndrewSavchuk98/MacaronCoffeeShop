@@ -3,6 +3,7 @@ package com.savchukandrew.macaroncoffeeshop.data.local
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.savchukandrew.macaroncoffeeshop.data.local.entities.RoomCartItemEntity
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +14,7 @@ interface CartItemDao {
     @Query("SELECT * FROM cart_item")
     fun getAll(): Flow<List<RoomCartItemEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(data: RoomCartItemEntity)
 
     @Delete

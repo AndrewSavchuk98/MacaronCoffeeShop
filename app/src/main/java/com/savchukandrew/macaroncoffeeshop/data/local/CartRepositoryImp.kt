@@ -17,7 +17,21 @@ class CartRepositoryImp @Inject constructor(
     override suspend fun saveData(data: CartItem) = withContext(dispatcher) {
         roomCartDataSource.write(
             RoomCartItemEntity(
-                productId = data.id,
+                id = data.id,
+                image = data.image,
+                productName = data.productName,
+                description = data.description,
+                price = data.price,
+                quantity = data.quantity
+            )
+        )
+
+    }
+
+    override suspend fun deleteData(data: CartItem) = withContext(dispatcher) {
+        roomCartDataSource.delete(
+            RoomCartItemEntity(
+                id = data.id,
                 image = data.image,
                 productName = data.productName,
                 description = data.description,
@@ -32,7 +46,7 @@ class CartRepositoryImp @Inject constructor(
         return@withContext roomCartDataSource.read().map { list ->
             list.map {
                 CartItem(
-                    id = it.productId,
+                    id = it.id,
                     image = it.image,
                     productName = it.productName,
                     description = it.description,

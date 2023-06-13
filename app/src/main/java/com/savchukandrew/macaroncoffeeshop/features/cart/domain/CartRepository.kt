@@ -6,5 +6,7 @@ interface CartRepository {
 
     suspend fun saveData(data: CartItem)
 
+    suspend fun deleteData(data: CartItem)
+
     suspend fun readData(): Flow<List<CartItem>>
 }

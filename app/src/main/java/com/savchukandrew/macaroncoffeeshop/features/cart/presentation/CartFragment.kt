@@ -14,7 +14,7 @@ import com.savchukandrew.macaroncoffeeshop.features.cart.presentation.adapters.C
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment : Fragment(R.layout.fragment_cart) {
+class CartFragment : Fragment(R.layout.fragment_cart), CartAdapter.OnRemoteButtonClick {
 
     private lateinit var binding: FragmentCartBinding
 
@@ -22,26 +22,26 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val cartItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(CART_ITEM_EXTRA, CartItem::class.java)
-        } else {
-            requireArguments().getParcelable(CART_ITEM_EXTRA)
+        if (arguments != null) {
+            val cartItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requireArguments().getParcelable(CART_ITEM_EXTRA, CartItem::class.java)
+            } else {
+                requireArguments().getParcelable(CART_ITEM_EXTRA)
+            }
+            viewModel.setData(cartItem!!)
         }
-
-        viewModel.setData(cartItem!!)
-
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCartBinding.bind(view)
 
-        val adapter = CartAdapter()
+        val adapter = CartAdapter(this)
         binding.cartRecycler.adapter = adapter
 
         viewModel.cartItemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
         binding.addMoreButton.setOnClickListener {
             findNavController().navigate(R.id.orderFragment)
         }
@@ -50,6 +50,9 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         }
     }
 
+    override fun onRemoteClick(cartItem: CartItem) {
+        viewModel.deleteItem(cartItem)
+    }
 
     companion object {
         private const val CART_ITEM_EXTRA = "CART_ITEM_EXTRA"
