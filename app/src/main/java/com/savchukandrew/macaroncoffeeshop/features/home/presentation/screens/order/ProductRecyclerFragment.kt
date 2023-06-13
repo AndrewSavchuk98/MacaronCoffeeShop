@@ -22,7 +22,7 @@ class ProductRecyclerFragment : Fragment(R.layout.fragment_home),
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModels<OrderViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,15 +41,15 @@ class ProductRecyclerFragment : Fragment(R.layout.fragment_home),
                 binding.parentRecyclerView.adapter = sectionAdapter
             }
         }
-        viewModel.sectionList.observe(viewLifecycleOwner) {
+
+        viewModel.state.observe(viewLifecycleOwner) {
             val list = when (requireArguments().getInt(TAB_POSITION_KEY)) {
-                0 -> it?.shuffled()
-                1 -> it?.shuffled()
+                0 -> it?.drinkList
+                1 -> it?.foodList
                 else -> emptyList()
             }
             sectionAdapter.submitList(list ?: emptyList())
         }
-
     }
 
     override fun onClick(productId: String) {

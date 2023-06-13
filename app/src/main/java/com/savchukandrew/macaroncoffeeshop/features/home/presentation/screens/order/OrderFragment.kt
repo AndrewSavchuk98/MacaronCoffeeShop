@@ -10,7 +10,7 @@ import com.savchukandrew.macaroncoffeeshop.features.home.presentation.adapters.P
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderFragment : Fragment(R.layout.fragment_order) {
+class OrderFragment : Fragment(R.layout.fragment_order){
 
     private lateinit var binding: FragmentOrderBinding
 

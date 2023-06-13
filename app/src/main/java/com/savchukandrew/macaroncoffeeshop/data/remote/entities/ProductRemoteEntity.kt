@@ -6,7 +6,7 @@ import com.google.firebase.firestore.PropertyName
 data class ProductRemoteEntity(
     val id: String = "",
     @PropertyName(value = "id_category")
-    val category: String = "",
+    val id_category: String = "",
     @PropertyName(value = "name")
     val name: String = "",
     @PropertyName(value = "image")

@@ -17,7 +17,7 @@ class ProductRepositoryImpl @Inject constructor(
             name = productEntity.name,
             image = productEntity.image,
             description = productEntity.description,
-            categoryId = productEntity.category,
+            categoryId = productEntity.id_category,
             price = productEntity.price,
             size = productEntity.size
         )
@@ -29,6 +29,7 @@ class ProductRepositoryImpl @Inject constructor(
                 id = it.id,
                 title = it.name,
                 imageUrl = it.image,
+                category = it.id_category
             )
         }
     }
