@@ -19,16 +19,18 @@ class CartViewModel @Inject constructor(
     val cartItemList: LiveData<List<CartItem>> = _cartItemList
 
     init {
+
         viewModelScope.launch {
-            _cartItemList.value = repository.readData()
+            repository.readData().collect{
+                _cartItemList.value = it
+            }
         }
     }
 
     fun setData(cartItem: CartItem) {
-        val list = mutableListOf<CartItem>()
-        list.add(cartItem)
+
         viewModelScope.launch {
-            repository.saveData(list.toList())
+            repository.saveData(cartItem)
         }
     }
 }

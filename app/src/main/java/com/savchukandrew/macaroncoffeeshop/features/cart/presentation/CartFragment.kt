@@ -20,13 +20,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private val viewModel by viewModels<CartViewModel>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentCartBinding.bind(view)
-
-        val adapter = CartAdapter()
-        binding.cartRecycler.adapter = adapter
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val cartItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requireArguments().getParcelable(CART_ITEM_EXTRA, CartItem::class.java)
         } else {
@@ -35,9 +30,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
         viewModel.setData(cartItem!!)
 
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentCartBinding.bind(view)
+
+        val adapter = CartAdapter()
+        binding.cartRecycler.adapter = adapter
+
         viewModel.cartItemList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-
         }
 
         binding.addMoreButton.setOnClickListener {

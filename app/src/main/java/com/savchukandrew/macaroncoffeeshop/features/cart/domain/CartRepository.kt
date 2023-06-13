@@ -1,8 +1,10 @@
 package com.savchukandrew.macaroncoffeeshop.features.cart.domain
 
+import kotlinx.coroutines.flow.Flow
+
 interface CartRepository {
 
-    suspend fun saveData(data: List<CartItem>)
+    suspend fun saveData(data: CartItem)
 
-    suspend fun readData(): List<CartItem>
+    suspend fun readData(): Flow<List<CartItem>>
 }
