@@ -33,12 +33,17 @@
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/giftFragment"
-        tools:layout="@layout/fragment_gift"
         android:name="com.savchukandrew.macaroncoffeeshop.features.gift.presentation.GiftFragment"
-        android:label="GiftFragment" />
+        android:label="GiftFragment"
+        tools:layout="@layout/fragment_gift" />
     <fragment
         android:id="@+id/cartFragment"
-        tools:layout="@layout/fragment_cart"
         android:name="com.savchukandrew.macaroncoffeeshop.features.cart.presentation.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/offerFragment"
+        android:name="com.savchukandrew.macaroncoffeeshop.features.offer.presentation.OfferFragment"
+        android:label="OfferFragment"
+        tools:layout="@layout/fragment_offer" />
 </navigation>
