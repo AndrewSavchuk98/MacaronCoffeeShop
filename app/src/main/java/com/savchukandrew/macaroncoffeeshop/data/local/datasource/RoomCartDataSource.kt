@@ -8,4 +8,6 @@ interface RoomCartDataSource {
     fun read(): Flow<List<RoomCartItemEntity>>
 
     suspend fun write(entity: RoomCartItemEntity)
+
+    suspend fun delete(entity: RoomCartItemEntity)
 }

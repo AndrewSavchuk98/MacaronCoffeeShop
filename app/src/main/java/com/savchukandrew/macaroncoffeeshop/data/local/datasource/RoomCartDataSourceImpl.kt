@@ -16,4 +16,8 @@ class RoomCartDataSourceImpl @Inject constructor(
     override suspend fun write(entity: RoomCartItemEntity) {
         dao.insertItem(entity)
     }
+
+    override suspend fun delete(entity: RoomCartItemEntity) {
+        dao.deleteItem(data = entity)
+    }
 }
