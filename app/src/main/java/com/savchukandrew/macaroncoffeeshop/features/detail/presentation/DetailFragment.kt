@@ -71,12 +71,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail), NumberCounterView.But
             binding.productName.text = it?.name
             binding.imageBackground.load(it?.image ?: "")
             binding.productTitle.text = it?.categoryId
+            binding.productDescriptionTextView.text = it?.description
             binding.priceTextView.text = "${it?.price} grn"
             updatePrice(it?.price ?: 0)
         }
 
         binding.addOrderButton.setOnClickListener {
-            Toast.makeText(context, " Price is ${totalPrice}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(
                 R.id.cartFragment, CartFragment.setArgs(
                     CartItem(

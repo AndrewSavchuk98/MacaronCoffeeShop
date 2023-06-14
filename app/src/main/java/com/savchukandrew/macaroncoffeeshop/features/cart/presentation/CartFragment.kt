@@ -3,6 +3,7 @@ package com.savchukandrew.macaroncoffeeshop.features.cart.presentation
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,7 +47,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartAdapter.OnRemoteButto
             findNavController().navigate(R.id.orderFragment)
         }
         binding.makeOfferButton.setOnClickListener {
-
+            findNavController().navigate(R.id.offerFragment)
         }
     }
 

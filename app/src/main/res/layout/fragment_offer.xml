@@ -112,7 +112,7 @@
             android:textAlignment="textEnd"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="240 grn" />
+            android:text="240 grn" />
     </LinearLayout>
 
 </LinearLayout>
